@@ -109,7 +109,7 @@ export const getSingleJob = async (req, res) => {
     }
 }
 
-export const DeleteJob = async (req, res) => {
+export const DeleteJob = async (req, res) => {  
     const { id: _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({ success:false,message: 'no job exists' })

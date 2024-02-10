@@ -7,6 +7,7 @@ import userRoutes from './routes/users.js'
 import tipsAdminRoutes from './routes/Tips.js'
 import coursesRoutes from './routes/Courses.js' 
 import jobsRoutes from './routes/Jobs.js'
+import userProfileRoutes from './routes/userProfile.js'
 
 
 const app = express()
@@ -26,6 +27,7 @@ app.use('/user',userRoutes)
 app.use('/admin',tipsAdminRoutes)
 app.use('/courses',coursesRoutes)
 app.use('/jobs',jobsRoutes)
+app.use('/user/profile',userProfileRoutes)
 
 app.get('/', (req, res) => {
   res.send(' This is Hotel Journals ')

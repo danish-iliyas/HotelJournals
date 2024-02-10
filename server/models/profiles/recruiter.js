@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-export const recruiterProfileSchema = new Schema({
+const recruiterProfileSchema = new Schema({
     // name: {type:String,required:true},
     companyName : {type:String,required:true},
     Designation : {type:String,required:true},

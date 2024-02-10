@@ -14,6 +14,9 @@ import setJobs from './jobsReducers/setJobsReducer'
 import AllJobsReducer from "./jobsReducers/allJobsReducer";
 import UpdateJobsReducer from "./jobsReducers/updateJobsReducer";
 import getSingleJobReducer from "./jobsReducers/getSingleJobReducer";
+import getProfileReducer from "./profile/getProfileReducer";
+import setProfileReducer from "./profile/setProfileReducer";
+import updateProfileReducer from "./profile/updateProfileReducer";
 
 export default combineReducers({
     authReducer,
@@ -32,7 +35,7 @@ export default combineReducers({
     AllJobsReducer,
     UpdateJobsReducer,
     getSingleJobReducer,
-    
-    
-    
+    getProfileReducer,
+    setProfileReducer,
+    updateProfileReducer
 })

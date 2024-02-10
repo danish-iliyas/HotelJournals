@@ -71,4 +71,16 @@ export const UpdateJob = (id,JobData) => API.patch(`jobs/singlejob/${id}`,JobDat
 export const DeleteJob = (id) => API.delete(`jobs/singlejob/${id}`)
 
 
+//  ----------------------------------------- For User Profile ------------------------------
+// Setting User Profile
+export const setUserProfile = (profileData) => API.post('/user/profile/setProfile',profileData)
+
+// Getting User Profile
+export const getUserProfile = (id) => API.get(`/user/profile/getProfile/${id}`)
+
+// Updating User Profile
+export const updateUserProfile = (id,profileData) => API.patch(`/user/profile/editProfile/${id}`,profileData)
+
+// Deleting User Profile
+export const DeleteUserProfile = (id) => API.delete(`/user/profile/deleteProfile/${id}`)
 
