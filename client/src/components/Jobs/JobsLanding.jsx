@@ -11,6 +11,7 @@ const JobsLanding = () => {
         <NavLink to='/jobs/post'> 
             <button className='btn btn-warning ml-3'> Post  Jobs </button>
         </NavLink>
+        
     </div>
   )
 }

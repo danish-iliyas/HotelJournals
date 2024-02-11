@@ -1,20 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
-// import cities from 'cities.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 import Select from 'react-select'
-import JoditEditor from 'jodit-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // import styles
-
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+import { UpdateAJobAction, getJobSingleAction } from '../../../redux/actions/jobsAdmin.js';
 import languages from '../AdminCourses/languages.js'
-import { CreateJob } from '../../../redux/actions/jobsAdmin.js';
+import { useParams } from 'react-router-dom';
 
-const CreateJobs = () => {
-  let localUser;
+
+const UpdateJobs = () => {
+  const { id } = useParams();
+  console.log(id);
+
   const dispatch = useDispatch();
 
   const [jobDecription, setJobDescription] = useState('');
@@ -40,6 +41,11 @@ const CreateJobs = () => {
   const [isExternalLink, setIsExternalLink] = useState(false);
   const [jobLink, setJobLink] = useState('');
 
+  const getJobsData = useSelector((state) => state.getSingleJobReducer);
+  const singleJob = getJobsData?.result;
+  // console.log("Hello Guuyzzzzzzzzz");
+  console.log(singleJob);
+
 
   const isValidUrl = (url) => {
     try {
@@ -60,32 +66,32 @@ const CreateJobs = () => {
 
   const cities = [
     { value: 'Delhi', label: 'Delhi' },
-    { value: 'Kanpur', label: 'Kanpur' },
+    { value: 'kanpur', label: 'Kanpur' },
     { value: 'Gurugram', label: 'Gurugram' },
     { value: 'Noida', label: 'Noida' },
   ]
 
   const skills = [
-    { value: 'Javascript', label: 'JavaScript' },
-    { value: 'Python', label: 'Python' },
-    { value: 'Java', label: 'Java' },
-    { value: 'C++', label: 'C++' },
+    { value: 'javascript', label: 'JavaScript' },
+    { value: 'python', label: 'Python' },
+    { value: 'java', label: 'Java' },
+    { value: 'c++', label: 'C++' },
   ]
 
   const extraBenifits = [
-    { value: 'Health Insurance', label: 'Health Insurance' },
-    { value: 'Life Insurance', label: 'Life Insurance' },
-    { value: 'Paid Leave', label: 'Paid Leave' },
-    { value: 'Work From Home', label: 'Work From Home' },
-    { value: 'Flexible Hours', label: 'Flexible Hours' },
-    { value: 'Free Food', label: 'Free Food' },
-    { value: 'Free Coffee', label: 'Free Coffee' },
-    { value: 'Free Snacks', label: 'Free Snacks' },
+    { value: 'health_insurance', label: 'Health Insurance' },
+    { value: 'life_insurance', label: 'Life Insurance' },
+    { value: 'paid_leave', label: 'Paid Leave' },
+    { value: 'work_from_home', label: 'Work From Home' },
+    { value: 'flexible_hours', label: 'Flexible Hours' },
+    { value: 'free_food', label: 'Free Food' },
+    { value: 'free_coffee', label: 'Free Coffee' },
+    { value: 'free_snacks', label: 'Free Snacks' },
   ]
 
-  const storedProfile = JSON.parse(localStorage.getItem('Profile'));
-  localUser = storedProfile?.result?._id;
-  console.log(localUser);
+  // const storedProfile = JSON.parse(localStorage.getItem('Profile'));
+  // localUser = storedProfile?.result?._id;
+  // console.log(localUser);
 
   useEffect(() => {
     if (isImmediate) {
@@ -93,6 +99,36 @@ const CreateJobs = () => {
       setJoiningDate(today);
     }
   }, [isImmediate]);
+
+
+
+  useEffect(() => {
+    dispatch(getJobSingleAction(id));
+  }, [dispatch, id])
+
+
+  useEffect(() => {
+    if (singleJob) {
+      setJobTitle(singleJob?.jobTitle);
+      setJobCategory(singleJob?.jobCategory);
+      setJobType(singleJob?.jobType);
+      setJobLocation(singleJob?.jobLocation);
+      setMandatorySkills(singleJob?.mandatorySkills);
+      setOptionalSkills(singleJob?.optionalSkills);
+      setJoiningDate(singleJob?.joiningDate);
+      setIsImmediate(singleJob?.isImmediate);
+      setMinWorkExp(singleJob?.workExperienceMin);
+      setMaxWorkExp(singleJob?.workExperienceMax);
+      setMinSalary(singleJob?.salaryStart);
+      setMaxSalary(singleJob?.salaryEnd);
+      setSalaryCurrency(singleJob?.salarySpecification);
+      setNoOfOpenings(singleJob?.no_of_openings);
+      setExtraBenifitsVal(singleJob?.extraBenifits);
+      setJobDescription(singleJob?.jobDescription);
+      setIsExternalLink(singleJob?.isExternal);
+      setJobLink(singleJob?.jobLink);
+    }
+  }, [singleJob])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -163,14 +199,14 @@ const CreateJobs = () => {
         job_description: jobDecription,
         isExternal: isExternalLink,
         job_link: jobLink,
-        created_by: localUser
       }
 
       console.log(jobsData)
+
       if (jobsData) {
-        const response = await dispatch(CreateJob(jobsData));
+        const response = await dispatch(UpdateAJobAction(id, jobsData));
         if (response.success) {
-          toast.success('Job Posted Successfully');
+          toast.success('Job Updated Successfully');
         } else {
           console.log(response)
           toast.error(response.message); // err.response.data.message
@@ -184,6 +220,7 @@ const CreateJobs = () => {
 
 
 
+
   return (
     <div className='mt-2 p-5'>
       <ToastContainer />
@@ -192,12 +229,25 @@ const CreateJobs = () => {
 
           <div className='col-md-4'>
             <label htmlFor="job_title"> Job Title  <small className='text-danger'> * </small> </label>
-            <input type='text' className='form-control' placeholder='Job Title' onChange={(e) => setJobTitle(e.target.value)} />
+            <input
+              type='text'
+              className='form-control'
+              placeholder='Job Title'
+              value={jobTitle}
+              onChange={(e) => setJobTitle(e.target.value)}
+
+            />
           </div>
 
           <div className='col-md-4'>
             <label htmlFor="company_name"> Job Category <small className='text-danger'> * </small> </label>
-            <select className='form-control' onChange={(e) => setJobCategory(e.target.value)}>
+            <select
+              className='form-control'
+              onChange={
+                (e) => setJobCategory(e.target.value)
+              }
+              value={jobCategory}
+            >
               <option value="">Select</option>
               <option value="intern">Intern</option>
               <option value="full-time">Full Time</option>
@@ -208,10 +258,14 @@ const CreateJobs = () => {
 
           <div className='col-md-2'>
             <label htmlFor="jobType"> Job Type  <small className='text-danger'> * </small> </label>
-            <select className='form-control' onChange={(e) => setJobType(e.target.value)}>
+            <select
+              className='form-control'
+              value={jobType}
+              onChange={(e) => setJobType(e.target.value)}
+            >
               <option value="">Select</option>
               <option value="remote"> Remote </option>
-              <option value="in-office"> InOffice </option>
+              <option value="in_office"> InOffice </option>
               <option value="hybrid"> Hybrid </option>
             </select>
           </div>
@@ -224,7 +278,7 @@ const CreateJobs = () => {
             <Select
               options={cities}
               isMulti
-              value={jobLocation}
+              value={jobLocation.map((city) => ({ label: city, value: city }))} // to show the selected values
               onChange={(selectedOps) => setJobLocation(selectedOps.map(options => options.value))}
             />
           </div>
@@ -233,7 +287,13 @@ const CreateJobs = () => {
           <div className='col-md-4'>
             <label htmlFor="mandatory_skills"> Mandatory Skills <small className='text-danger'> * </small> </label>
             {/* Multiselect */}
-            <Select options={skills} isMulti onChange={(selectedOps) => setMandatorySkills(selectedOps.map(options => options.value))} />
+            <Select
+              options={skills}
+              isMulti
+              value={mandatorySkills.map((skill) => ({ label: skill, value: skill }))} // to show the selected values
+              onChange={(selectedOps) => setMandatorySkills(selectedOps.map(options => options.value))}
+
+            />
           </div>
 
 
@@ -241,7 +301,13 @@ const CreateJobs = () => {
             {/* Multiselect */}
 
             <label htmlFor="optional_skills"> Optional Skills </label>
-            <Select options={skills} isMulti onChange={(selectedOps) => setOptionalSkills(selectedOps.map(options => options.value))} />
+            <Select
+              options={skills}
+              isMulti
+              value={optionalSkills.map((skill) => ({ label: skill, value: skill }))} // to show the selected values
+              onChange={(selectedOps) => setOptionalSkills(selectedOps.map(options => options.value))}
+
+            />
           </div>
         </div>
 
@@ -252,6 +318,7 @@ const CreateJobs = () => {
             <input
               type='date'
               disabled={disableJoiningDate}
+              value={joiningDate}
               className='form-control'
               min={new Date().toISOString().split('T')[0]}
               // "YYYY-MM-DDTHH:mm:ss.sssZ". For example, "2022-03-15 T 13:56:59.120Z".
@@ -260,7 +327,14 @@ const CreateJobs = () => {
             />
 
             <div className='mt-3'>
-              <input type='checkbox' id='isImmediate' className='pt-2' onClick={() => setDisableJoiningDate(prevState => !prevState)} onChange={() => setIsImmediate(true)} style={{ transform: 'scale(1.6)' }} />
+              <input
+                type='checkbox'
+                id='isImmediate'
+                className='pt-2'
+                value={isImmediate ? true : false}
+                onClick={() => setDisableJoiningDate(prevState => !prevState)} onChange={() => setIsImmediate(true)}
+                style={{ transform: 'scale(1.6)' }}
+              />
               <label htmlFor='isImmediate' className='ml-1 ' > Immediate Joining (Onboard within 30 days) </label>
             </div>
           </div>
@@ -273,12 +347,28 @@ const CreateJobs = () => {
             <div className='row'>
               <div className='col-md-4'>
                 <label htmlFor="minExperience">Minimum </label>
-                <input type='number' className='form-control' placeholder='0' min='0' max='20' onChange={(e) => setMinWorkExp(parseInt(e.target.value))} />
+                <input
+                  type='number'
+                  className='form-control'
+                  placeholder='0'
+                  min='0'
+                  max='20'
+                  value={minWorkExp}
+                  onChange={(e) => setMinWorkExp(parseInt(e.target.value))}
+                />
               </div>
 
               <div className='col-md-4'>
                 <label htmlFor="maxExperience">Maximum </label>
-                <input type='number' className='form-control' placeholder='20' min='0' max='20' onChange={(e) => setMaxWorkExp(parseInt(e.target.value))} />
+                <input
+                  type='number'
+                  className='form-control'
+                  placeholder='20'
+                  min='0'
+                  max='20'
+                  value={maxWorkExp}
+                  onChange={(e) => setMaxWorkExp(parseInt(e.target.value))}
+                />
               </div>
             </div>
           </div>
@@ -288,20 +378,38 @@ const CreateJobs = () => {
             <div className='row'>
               <div className='col-md-4'>
                 <label htmlFor="minSalary">Minimum </label>
-                <input type='number' className='form-control' placeholder='0' min='0' onChange={(e) => setMinSalary(parseInt(e.target.value))} />
+                <input
+                  type='number'
+                  className='form-control'
+                  placeholder='0'
+                  min='0'
+                  value={minSalary}
+                  onChange={(e) => setMinSalary(parseInt(e.target.value))}
+                />
               </div>
 
               <div className='col-md-4'>
                 <label htmlFor="maxSalary">Maximum </label>
-                <input type='number' className='form-control' placeholder='100' min='0' onChange={(e) => setMaxSalary(parseInt(e.target.value))} />
+                <input
+                  type='number'
+                  className='form-control'
+                  placeholder='100'
+                  min='0'
+                  value={maxSalary}
+                  onChange={(e) => setMaxSalary(parseInt(e.target.value))}
+                />
               </div>
 
               <div className='col-md-2'>
                 <label htmlFor="currency">Currency</label>
-                <select className='form-control mt-2' onChange={(e) => setSalaryCurrency(e.target.value)}>
+                <select
+                  className='form-control mt-2'
+                  value={salaryCurrency}
+                  onChange={(e) => setSalaryCurrency(e.target.value)}
+                >
                   <option value=""> Select </option>
                   {/* Countriy wise values  */}
-                  <option value="LPA"> LPA </option>
+                  <option value="lpa"> LPA </option>
                   <option value="AUD"> AUD </option>
                   <option value="USD"> USD </option>
                   <option value="EUR"> EUR </option>
@@ -321,12 +429,25 @@ const CreateJobs = () => {
         <div className='form-row'>
           <div className='col-md-4'>
             <label htmlFor="no_of_ops"> No of Openings <small className='text-danger'> * </small></label>
-            <input type='number' className='form-control' placeholder='5' min='0' max='500' onChange={(e) => setNoOfOpenings(parseInt(e.target.value))} />
+            <input
+              type='number'
+              className='form-control'
+              placeholder='5'
+              min='0'
+              max='500'
+              value={noOfOpenings}
+              onChange={(e) => setNoOfOpenings(parseInt(e.target.value))}
+            />
           </div>
           <div className='col-md-4'>
             <label htmlFor="extra_benifits"> Extra Benifits </label>
             {/* Multiselect */}
-            <Select options={extraBenifits} isMulti onChange={(selectedOps) => setExtraBenifitsVal(selectedOps.map(option => option.value))} />
+            <Select
+              options={extraBenifits}
+              isMulti
+              value={extraBenifitsVal.map((benifit) => ({ label: benifit, value: benifit }))}
+              onChange={(selectedOps) => setExtraBenifitsVal(selectedOps.map(option => option.value))}
+            />
           </div>
           <div className='col-md-6'>
             {/* Left Jodit Editor  */}
@@ -380,4 +501,4 @@ const CreateJobs = () => {
   )
 }
 
-export default CreateJobs
+export default UpdateJobs

@@ -164,7 +164,7 @@ const CreateCourse = () => {
         <div className='container mt-4 mb-3'>
             <h3 className='text-light'> create Course </h3>
             <Toaster />
-            <form >
+            <form onSubmit={handleSubmit}>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <div>
@@ -321,7 +321,7 @@ const CreateCourse = () => {
                 </div>
 
 
-                <button type="submit" class="mt-3 btn btn-success w-100" onClick={handleSubmit} disabled={loading}>
+                <button type="submit" class="mt-3 btn btn-success w-100"  disabled={loading}>
                     {loading ? 'Loading...' : 'Publish'}
                 </button>
             </form>

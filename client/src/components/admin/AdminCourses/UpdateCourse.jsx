@@ -213,7 +213,7 @@ const UpdateCourse = () => {
         <div className='container mt-4 mb-3'>
             <h1> Update Course hain ji </h1>
             <Toaster />
-            <form >
+            <form onSubmit={handleSubmit}>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <div>
@@ -370,7 +370,7 @@ const UpdateCourse = () => {
                 </div>
 
 
-                <button type="submit" class="mt-3 btn btn-success w-100" onClick={handleSubmit} disabled={loading}>
+                <button type="submit" class="mt-3 btn btn-success w-100" disabled={loading}>
                     {loading ? 'Loading...' : 'Publish'}
                 </button>
             </form>

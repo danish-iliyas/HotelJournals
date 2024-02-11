@@ -13,11 +13,24 @@ export const postJobs = async (req, res) => {
             job_description, isExternal, job_link, created_by
         } = req.body;
 
-        // console.log(req.body);
-
-        if (!job_title || !job_category || !job_type || !joining_date || !work_experience_min || job_location.length === 0 || mandatory_skills.length === 0 || !work_experience_max || !salary_specification || !salary_start || !salary_end || !no_of_openings || !job_description || isExternal === undefined || !created_by) {
-            return res.status(400).json({ message: "Please Fill all the fieldsssss" });
-        } else {
+        if (
+            !job_title ||
+            !job_category ||
+            !job_type ||
+            job_location.length === 0 ||
+            mandatory_skills.length === 0 ||
+            (is_immediate === false && !joining_date) ||
+            !work_experience_min ||
+            !work_experience_max ||
+            !salary_start ||
+            !salary_end ||
+            !salary_specification||
+            !no_of_openings ||
+            !job_description
+          ) {
+            return res.status(400).json({ success:false,message: "Please Fill all the fieldsssss" });
+          }        
+        else {
             const newJob = await Jobs.create({
                 jobTitle: job_title,
                 jobCategory: job_category,
@@ -47,7 +60,7 @@ export const postJobs = async (req, res) => {
         }
     } catch (error) {
         console.log("Error from postJobs Controller ", error.message)
-        res.status(500).json({ success: false, message: error.message })
+        res.status(500).json({ success: false, message: 'something went wrong' })
     }
 }
 
@@ -80,9 +93,9 @@ export const getAllJobs = async (req, res) => {
                 created_by: singleJob.created_by
             })
         });
-        res.status(200).json({ message: 'All jobs Data Fetched Successfully', result: AllJobsArray })
+        res.status(200).json({ success:true,message: 'All jobs Data Fetched Successfully', result: AllJobsArray })
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ success:false,message: error.message });
     }
 }
 
@@ -90,29 +103,29 @@ export const getSingleJob = async (req, res) => {
     try {
         const { id } = req.params;
         const singleJob = await Jobs.findById(id);
-        res.status(200).json({ message: 'Single Job Data', result: singleJob })
+        res.status(200).json({ success:true,message: 'Single Job Data', result: singleJob })
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ success:false,message: err.message })
     }
 }
 
-export const DeleteJob = async (req, res) => {
+export const DeleteJob = async (req, res) => {  
     const { id: _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id)) {
-        return res.status(400).json({ message: 'no job exists' })
+        return res.status(400).json({ success:false,message: 'no job exists' })
     }
     try {
         await Jobs.findByIdAndDelete(_id);
-        res.status(200).json({message:'job deleted successfully'})
+        res.status(200).json({success:true , message:'job deleted successfully'})
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ success:false , message: err.message })
     }
 }
 
 export const editJob = async (req, res) => {
     const {id:_id} = req.params;
     if(!mongoose.Types.ObjectId.isValid(_id)){
-        return res.status(400).send('Invalid Id Provided');
+        return res.status(400).send({success:false,message:'Invalid job ID'});
     }
     const {
         job_title, job_category, job_type,
@@ -151,12 +164,12 @@ export const editJob = async (req, res) => {
         console.log(updatedJob);
         
         if(!updatedJob){
-            return res.status(400).json({message:`Failed to update job ${error.message}`})
+            return res.status(400).json({success:false,message:'Failed to update job'})
         }else{
-            res.status(200).json({message:'Job Updated Successfulllllllly',result:updatedJob})
+            res.status(200).json({success:true,message:'Job Updated Successfulllllllly',result:updatedJob})
         }
     } catch (error) {
         console.log("Error from editJob Controller ",error.message)
-        res.status(500).json({message:error.message})
+        res.status(500).json({success:false,message:error.message})
     }
 }

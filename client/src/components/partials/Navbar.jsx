@@ -122,6 +122,14 @@ const Navbar = () => {
                                 </NavLink>
                             </div>
                         </li>
+
+                        <li className="nav-item active">
+                            <div className='nav-link' >
+                                <NavLink to='/jobs/post' className={NavCSS.header_nav_links} >
+                                  Recruiter
+                                </NavLink>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 {/* <button className='btn btn-dark '> */}
@@ -146,7 +154,7 @@ const Navbar = () => {
                                 <button onClick={handleLogout} className='btn btn-danger' >
                                     Logout
                                 </button>
-                            <Link to={`/profile/${User?.result?._id}`} style={{color:"white",textDecoration:"none",paddingLeft:'5px'}}> Hola  {User?.result?.fname}  </Link> &nbsp;
+                            <Link to={`/profile/${User?.result?._id}`} style={{color:"white",textDecoration:"none",paddingLeft:'5px'}}> Hello  {User?.result?.fname}  </Link> &nbsp;
                             </div>
                         </>)
 

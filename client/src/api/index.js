@@ -54,5 +54,33 @@ export const DeleteCourse = (id) => API.delete(`/courses/singleCourse/${id}`)
 
 
 
+//  ----------------------------  For Creating a Job---------------
+// Job Admin (Job creation)
+export const PostNewJob = (JobData) => API.post('/jobs/createjob',JobData)
 
+// Job Data (Job fetching)  For All Jobs
+export const GetAllJobs = () =>  API.get('jobs/allJobs')
+
+// Getting Single Job
+export const GetSingleJob = (id) => API.get(`/jobs/singlejob/${id}`)
+
+// Updating a Job
+export const UpdateJob = (id,JobData) => API.patch(`jobs/singlejob/${id}`,JobData)
+
+// Deleting a Job
+export const DeleteJob = (id) => API.delete(`jobs/singlejob/${id}`)
+
+
+//  ----------------------------------------- For User Profile ------------------------------
+// Setting User Profile
+export const setUserProfile = (profileData) => API.post('/user/profile/setProfile',profileData)
+
+// Getting User Profile
+export const getUserProfile = (id) => API.get(`/user/profile/getProfile/${id}`)
+
+// Updating User Profile
+export const updateUserProfile = (id,profileData) => API.patch(`/user/profile/editProfile/${id}`,profileData)
+
+// Deleting User Profile
+export const DeleteUserProfile = (id) => API.delete(`/user/profile/deleteProfile/${id}`)
 
