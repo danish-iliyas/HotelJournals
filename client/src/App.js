@@ -5,6 +5,7 @@ import './App.css';
 import Navbar from './components/partials/Navbar'
 import AllRoutes from './AllRoutes';
 
+
 function App() {
   return (
     <div className='App'>

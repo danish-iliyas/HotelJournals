@@ -20,6 +20,7 @@ import UpdateCourse from './components/admin/AdminCourses/UpdateCourse';
 import JobsLanding from './components/Jobs/JobsLanding';
 import JobsDashboard from './components/Jobs/JobsDashboard';
 import CreateJobs from './components/admin/AdminJobs/CreateJobs';
+import HotelLandingpage from './components/Hotel Journals Landing page/HotelLandingpage';
 
 
 const AllRoutes = () => {
@@ -61,6 +62,9 @@ const AllRoutes = () => {
             {/* // Temporary Route for testing */}
 
             <Route path='/test/:id' element={<SingleTip /> } > </Route>
+
+            {/* landig page  */}
+            <Route path='/HotelLandingpage' element={<HotelLandingpage /> } > </Route>
         </Routes>
     )
 }
