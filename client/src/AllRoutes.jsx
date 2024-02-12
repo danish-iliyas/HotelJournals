@@ -16,10 +16,13 @@ import Courses from './components/courses/Courses';
 import CreateCourse from './components/admin/AdminCourses/CreateCourse';
 import CourseDescription from './components/courses/CourseDescription';
 import EducatorDashboard from './components/admin/AdminCourses/EducatorDashboard';
+import  UpdateJobs from "./components/admin/AdminJobs/UpdateJobs";
+import  RecruiterDashboard from "./components/admin/AdminJobs/RecruiterDashboard";
 import UpdateCourse from './components/admin/AdminCourses/UpdateCourse';
 import JobsLanding from './components/Jobs/JobsLanding';
 import JobsDashboard from './components/Jobs/JobsDashboard';
 import CreateJobs from './components/admin/AdminJobs/CreateJobs';
+import HotelLandingpage from './components/Hotel Journals Landing page/HotelLandingpage';
 
 
 const AllRoutes = () => {
