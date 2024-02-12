@@ -16,6 +16,7 @@ import ProfilePic from './ProfilePic';
 import PrCss from './userProfile.module.css';
 import { fetchAllUsers } from '../../redux/actions/users'
 import { DeleteUserProfile, createProfileAction, getProfileAction, updateUserProfileAction } from '../../redux/actions/userProfile';
+import UserExperience from './UserExperience';
 
 
 
@@ -26,7 +27,7 @@ function MyVerticallyCenteredModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      onHide={props.onhide}
+      onHide={props.onHide}
     >
       <Modal.Header closeButton  >
         <Modal.Title id="contained-modal-title-vcenter">
@@ -42,7 +43,6 @@ function MyVerticallyCenteredModal(props) {
           <div class="form-group">
             <textarea
               class="form-control"
-              id="exampleFormControlTextarea1"
               onChange={(e) => props.setintrodesc(e.target.value)}
               placeholder='Write a short and sweet introduction about yourself to catch recruiters attention.'
               rows="3">
@@ -51,7 +51,7 @@ function MyVerticallyCenteredModal(props) {
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onhide} className='btn btn-secondary'> Close</Button>
+        <Button onClick={(event) => { event.stopPropagation(); props.onHide(); }} className='btn btn-secondary'> Close</Button>
         <Button onClick={props.submitintro}>
           {props.loading ? <>
             <div className='d-flex'>
@@ -76,7 +76,7 @@ function MyVerticallyCenteredModalForEdit(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      onHide={props.onhide}
+      onHide={props.onHide}
     >
       <Modal.Header closeButton  >
         <Modal.Title id="contained-modal-title-vcenter">
@@ -103,7 +103,7 @@ function MyVerticallyCenteredModalForEdit(props) {
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onhide} className='btn btn-secondary'> Close</Button>
+      <Button onClick={(event) => { event.stopPropagation(); props.onHide(); }} className='btn btn-secondary'> Close</Button>
         <Button onClick={props.deletevalue} className='btn btn-danger' >  
           {props.loadingdel ? <> 
             <div className='d-flex'>
@@ -311,7 +311,7 @@ const UserProfile = () => {
                     {/* Modal Start  */}
                     <MyVerticallyCenteredModal
                       show={modalShow}
-                      onhide={() => setModalShow(false)}
+                      onHide={() => setModalShow(false)}
                       submitintro={handleIntroduceYourself}
                       setintrodesc={setintrodesc}
                       loading={loading}
@@ -333,7 +333,7 @@ const UserProfile = () => {
                     {/* Modal Start  */}
                     <MyVerticallyCenteredModalForEdit
                       show={modalShow}
-                      onhide={() => setModalShow(false)}
+                      onHide={() => setModalShow(false)}
                       submithandler={handleEditIntro}
                       value={editTheIntro}
                       changevalue={setEditTheIntro}
@@ -355,16 +355,7 @@ const UserProfile = () => {
               </div>
             </>)
           }
-
-          <div className={` ${PrCss.addSections}`}>
-            <div className="card w-100">
-              <div className="card-body text-center">
-                <i className='fa-solid fa-plus'></i>
-                <p className='card-text'> Add your experiences  </p>
-              </div>
-            </div>
-          </div>
-
+            <UserExperience />
           <div className={` ${PrCss.addSections}`}>
             <div className="card w-100">
               <div className="card-body text-center">

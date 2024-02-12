@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import UserProfile from '../models/profiles/user.js';
+import UserProfile from '../../models/profiles/user.js';
+
+//  For Introduction
 
 export const setUserProfile = async (req, res) => {
     try {
@@ -19,7 +21,7 @@ export const setUserProfile = async (req, res) => {
         }
     } catch (error) {
         console.log("Error from setUserProfile Controller ", error.message)
-        res.status(400).json({ success: false, message: "Failed to create user profile" })
+        res.status(500).json({ success: false, message: "Failed to create user profile" })
     }
 }
 

@@ -71,7 +71,7 @@ export const UpdateJob = (id,JobData) => API.patch(`jobs/singlejob/${id}`,JobDat
 export const DeleteJob = (id) => API.delete(`jobs/singlejob/${id}`)
 
 
-//  ----------------------------------------- For User Profile ------------------------------
+//  ----------------------------------------- For User Profile (Introduction) ------------------------------
 // Setting User Profile
 export const setUserProfile = (profileData) => API.post('/user/profile/setProfile',profileData)
 
@@ -84,3 +84,15 @@ export const updateUserProfile = (id,profileData) => API.patch(`/user/profile/ed
 // Deleting User Profile
 export const DeleteUserProfile = (id) => API.delete(`/user/profile/deleteProfile/${id}`)
 
+//  ----------------------------------------- For User Profile  (Experience) ------------------------------
+// Setting User Experience
+export const setUserExperience = (experienceData) => API.post('/user/profile/setExperience',experienceData)
+
+// Getting User Experience
+export const getUserExperience = (id) => API.get(`/user/profile/getExperience/${id}`)
+
+// Updating User Experience
+export const editUserExperience = (id,experienceData) => API.patch(`/user/profile/editExperience/${id}`,experienceData)
+
+// Deleting User Experience
+export const DeleteUserExperience = (id) => API.delete(`/user/profile/deleteExperience/${id}`)

@@ -17,6 +17,9 @@ import getSingleJobReducer from "./jobsReducers/getSingleJobReducer";
 import getProfileReducer from "./profile/getProfileReducer";
 import setProfileReducer from "./profile/setProfileReducer";
 import updateProfileReducer from "./profile/updateProfileReducer";
+import getExpReducer from "./profile/userExperience/getExp";
+import setExpReducer from "./profile/userExperience/setExp";
+import updateExpReducer from "./profile/userExperience/updateExp";
 
 export default combineReducers({
     authReducer,
@@ -37,5 +40,8 @@ export default combineReducers({
     getSingleJobReducer,
     getProfileReducer,
     setProfileReducer,
-    updateProfileReducer
+    updateProfileReducer,
+    getExpReducer,
+    setExpReducer,
+    updateExpReducer,
 })
