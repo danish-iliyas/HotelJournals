@@ -1,5 +1,15 @@
 import mongoose, { Schema } from "mongoose";
 
+const UserEducationSchema = new Schema({
+    school: {type:String,required:true},
+    city: {type:String,required:true},
+    degree: {type:String,required:true},
+    start_date: {type:Date,required:true},
+    end_date: {type:Date,required:true},
+    description : {type:String,required:false},
+    userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
+});
+
 const ExperienceSchema = new Schema({
     jobTitle: {type:String,required:true},
     company: {type:String,required:true},
@@ -18,5 +28,7 @@ const UserProfileSchema = new Schema({
     userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
 });
 
+
+export const UserEducation = mongoose.model('UserEducation',UserEducationSchema);
 export const Experience = mongoose.model('Experience',ExperienceSchema);
 export default mongoose.model('UserProfile',UserProfileSchema)

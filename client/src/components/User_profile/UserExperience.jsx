@@ -662,7 +662,7 @@ const UserExperience = () => {
                     <div className={` ${PrCss.addSections}`}>
                         <div className="card w-100">
                             <div className='row'>
-                                <div class="card-header">
+                                <div class="alert alert-warning">
                                     Experience
                                 </div>
                                 <div style={{ cursor: 'pointer' }} onClick={() => setModalShow(true)}>

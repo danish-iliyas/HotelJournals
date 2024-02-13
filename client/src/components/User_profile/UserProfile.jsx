@@ -17,6 +17,7 @@ import PrCss from './userProfile.module.css';
 import { fetchAllUsers } from '../../redux/actions/users'
 import { DeleteUserProfile, createProfileAction, getProfileAction, updateUserProfileAction } from '../../redux/actions/userProfile';
 import UserExperience from './UserExperience';
+import UserEducation from './UserEducation';
 
 
 
@@ -356,6 +357,7 @@ const UserProfile = () => {
             </>)
           }
             <UserExperience />
+            <UserEducation /> 
           <div className={` ${PrCss.addSections}`}>
             <div className="card w-100">
               <div className="card-body text-center">

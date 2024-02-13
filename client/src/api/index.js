@@ -96,3 +96,16 @@ export const editUserExperience = (id,experienceData) => API.patch(`/user/profil
 
 // Deleting User Experience
 export const DeleteUserExperience = (id) => API.delete(`/user/profile/deleteExperience/${id}`)
+
+// ----------------------------------------- For User Profile  (Education) ------------------------------`
+// Setting User Education
+export const setUserEducation = (educationData) => API.post('/user/profile/setEducation',educationData)
+
+// Getting User Education
+export const getUserEducation = (id) => API.get(`/user/profile/getEducation/${id}`)
+
+// Updating User Education
+export const editUserEducation = (id,updatedData) => API.patch(`/user/profile/edituserEducation/${id}`,updatedData)
+
+// Deleting User Education
+export const deleteUserEducation = (id) => API.delete(`/user/profile/deleteEducation/${id}`)

@@ -1,4 +1,4 @@
-import * as api from '../../../api/index.js'
+import * as api from '../../../api/index.js'    // import all the functions from api
 
 export const setUserExperienceAction = (experienceData) => async(dispatch) => {
     try {

@@ -20,6 +20,9 @@ import updateProfileReducer from "./profile/updateProfileReducer";
 import getExpReducer from "./profile/userExperience/getExp";
 import setExpReducer from "./profile/userExperience/setExp";
 import updateExpReducer from "./profile/userExperience/updateExp";
+import getEducationReducer from "./profile/userEducation/getEdu";
+import setEducationReducer from "./profile/userEducation/setEdu";
+import updateEducationReducer from "./profile/userEducation/updateEdu";
 
 export default combineReducers({
     authReducer,
@@ -44,4 +47,8 @@ export default combineReducers({
     getExpReducer,
     setExpReducer,
     updateExpReducer,
+    getEducationReducer,
+    setEducationReducer,
+    updateEducationReducer,
+    
 })
