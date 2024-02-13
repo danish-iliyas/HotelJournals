@@ -23,6 +23,9 @@ import JobsLanding from './components/Jobs/JobsLanding';
 import JobsDashboard from './components/Jobs/JobsDashboard';
 import CreateJobs from './components/admin/AdminJobs/CreateJobs';
 import HotelLandingpage from './components/Hotel Journals Landing page/HotelLandingpage';
+import Animatedpage from './components/Animated-page/Animatedpage';
+
+
 
 
 const AllRoutes = () => {
@@ -67,6 +70,7 @@ const AllRoutes = () => {
 
             {/* landig page  */}
             <Route path='/HotelLandingpage' element={<HotelLandingpage /> } > </Route>
+            <Route path='/Animatedpage' element={<Animatedpage /> } > </Route>
         </Routes>
     )
 }
