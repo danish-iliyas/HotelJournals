@@ -230,7 +230,6 @@ function MyVerticallyCenteredModalForEdit(props) {
     // const filteredData = singleData?.filter(data => data._id == id)[0];;
     // console.log('Filtered Data', filteredData);
 
-
     useEffect(() => {
         if (education) {
             setSchool(education?.school);

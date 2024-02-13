@@ -109,3 +109,19 @@ export const editUserEducation = (id,updatedData) => API.patch(`/user/profile/ed
 
 // Deleting User Education
 export const deleteUserEducation = (id) => API.delete(`/user/profile/deleteEducation/${id}`)
+
+
+
+
+// ----------------------------------------- For User Profile  (Skills) ------------------------------
+// Setting User Skills
+export const setUserSkills = (skillData) => API.post('/user/profile/setSkills',skillData)
+
+// Getting User Skills
+export const getUserSkills = (id) => API.get(`/user/profile/getSkills/${id}`)
+
+// Updating User Skills
+export const updateUserSkills = (id,updatedData) => API.patch(`/user/profile/editSkills/${id}`,updatedData)
+
+// Deleting User Skills
+export const deleteUserSkills = (id) => API.delete(`/user/profile/deleteSkills/${id}`)

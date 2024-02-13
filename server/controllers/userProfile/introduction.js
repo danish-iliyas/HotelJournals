@@ -78,4 +78,3 @@ export const EditProfile = async (req, res) => {
     }
 }
 
-

@@ -2,6 +2,7 @@ import express from 'express';
 import { DeleteProfile, EditProfile, getUserProfile  , setUserProfile} from '../controllers/userProfile/introduction.js';
 import { DeleteExperience, EditExperience, getUserExperience, setUserExperience } from '../controllers/userProfile/experienceController.js';
 import { DeleteEducation, UpdateEducation, getUserEducation, setUserEducation } from '../controllers/userProfile/educationControler.js';
+import { DeleteSkills, EditSkills, getUserSkills, setUserSkills } from '../controllers/userProfile/skillsController.js';
 
 
 const router = express.Router();
@@ -24,6 +25,11 @@ router.get('/getEducation/:id',getUserEducation)
 router.patch('/edituserEducation/:id',UpdateEducation)
 router.delete('/deleteEducation/:id',DeleteEducation)
 
+// Skills Section routes
+router.post('/setSkills',setUserSkills)
+router.get('/getSkills/:id',getUserSkills)
+router.delete('/deleteSkills/:id',DeleteSkills)
+router.patch('/editSkills/:id',EditSkills)
 
 
 export default router;

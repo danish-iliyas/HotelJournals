@@ -24,6 +24,11 @@ import getEducationReducer from "./profile/userEducation/getEdu";
 import setEducationReducer from "./profile/userEducation/setEdu";
 import updateEducationReducer from "./profile/userEducation/updateEdu";
 
+import getskillsReducer from "./profile/userSkills/getskills";
+import setUserSkillsReducer from "./profile/userSkills/setskills";
+import UpdateSkillsReducer from "./profile/userSkills/updateskills";
+
+
 export default combineReducers({
     authReducer,
     currentuserReducer,
@@ -50,5 +55,7 @@ export default combineReducers({
     getEducationReducer,
     setEducationReducer,
     updateEducationReducer,
-    
+    getskillsReducer,
+    setUserSkillsReducer,
+    UpdateSkillsReducer,
 })

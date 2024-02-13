@@ -16,8 +16,11 @@ import ProfilePic from './ProfilePic';
 import PrCss from './userProfile.module.css';
 import { fetchAllUsers } from '../../redux/actions/users'
 import { DeleteUserProfile, createProfileAction, getProfileAction, updateUserProfileAction } from '../../redux/actions/userProfile';
+// Divided components into different files
 import UserExperience from './UserExperience';
 import UserEducation from './UserEducation';
+import KeySkills from './KeySkills';
+import UserCertifications from './UserCertifications';
 
 
 
@@ -98,25 +101,25 @@ function MyVerticallyCenteredModalForEdit(props) {
               onChange={(e) => props.changevalue(e.target.value)}
               placeholder='Write a short and sweet introduction about yourself to catch recruiters attention.'
               rows="3"
-              >
+            >
             </textarea>
           </div>
         </form>
       </Modal.Body>
       <Modal.Footer>
-      <Button onClick={(event) => { event.stopPropagation(); props.onHide(); }} className='btn btn-secondary'> Close</Button>
-        <Button onClick={props.deletevalue} className='btn btn-danger' >  
-          {props.loadingdel ? <> 
+        <Button onClick={(event) => { event.stopPropagation(); props.onHide(); }} className='btn btn-secondary'> Close</Button>
+        <Button onClick={props.deletevalue} className='btn btn-danger' >
+          {props.loadingdel ? <>
             <div className='d-flex'>
               <PuffLoader
                 size={25}
                 color="#ffffff"
               /> <span className='pl-2'> Removing ... </span>
             </div>
-           </> : 'Remove Intro'}
-         
+          </> : 'Remove Intro'}
+
         </Button>
-        <Button  onClick={props.submithandler}>
+        <Button onClick={props.submithandler}>
           {props.loading ? <>
             <div className='d-flex'>
               <PuffLoader
@@ -143,7 +146,7 @@ const UserProfile = () => {
   const [loadingDel, setLoadingDel] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [introdesc, setintrodesc] = useState('');
-  const [editTheIntro,setEditTheIntro] = useState('');
+  const [editTheIntro, setEditTheIntro] = useState('');
 
   // Getting current User Profile from the database
 
@@ -159,7 +162,8 @@ const UserProfile = () => {
   const getProfileState = useSelector((state) => state.getProfileReducer)
   const currentUserProfileData = getProfileState?.data?.result;
   const holaUserIntro = currentUserProfileData?.introduction;
-  // console.log("Current User Profile Data : ", holaUserIntro);
+  console.log("Current User Introduction: ", holaUserIntro);
+
 
 
 
@@ -185,10 +189,10 @@ const UserProfile = () => {
 
 
   useEffect(() => {
-    if(holaUserIntro){
+    if (holaUserIntro) {
       setEditTheIntro(holaUserIntro);
     }
-  },[holaUserIntro])
+  }, [holaUserIntro])
 
   const handleIntroduceYourself = async () => {
     // if(!introdesc){
@@ -197,7 +201,7 @@ const UserProfile = () => {
     setLoading(true);
     const userProfileData = {
       introduction: introdesc,
-      userId:id
+      userId: id
     }
 
     const repsonse = await dispatch(createProfileAction(userProfileData));
@@ -213,21 +217,21 @@ const UserProfile = () => {
   }
 
 
-  const handleEditIntro = async() => {
-    if(!editTheIntro){
+  const handleEditIntro = async () => {
+    if (!editTheIntro) {
       return toast.error('Please fill the introduction field');
     }
     setLoading(true);
     const updatedData = {
       introduction: editTheIntro,
-      }
+    }
 
-    const response = await dispatch(updateUserProfileAction(id,updatedData));
+    const response = await dispatch(updateUserProfileAction(id, updatedData));
     console.log(response)
     if (response.success) {
 
-        const getsingleProfileData = await dispatch(getProfileAction(id));
-        console.log("Get Single Profile Data : ", getsingleProfileData);
+      const getsingleProfileData = await dispatch(getProfileAction(id));
+      console.log("Get Single Profile Data : ", getsingleProfileData);
 
       setLoading(false)
       setModalShow(false)
@@ -236,17 +240,17 @@ const UserProfile = () => {
     } else {
       console.log("Failed to Update Profile");
     }
-  } 
+  }
 
-  const deleteIntro =  async() => {
+  const deleteIntro = async () => {
     setLoadingDel(true);
     const response = await dispatch(DeleteUserProfile(id));
     if (response.success) {
-        const getsingleProfileData = await dispatch(getProfileAction(id));
-        console.log("Get Single Profile Data : ", getsingleProfileData);
-        setLoadingDel(false)
-        setModalShow(false)
-        console.log("Desc Deleted Successfully");
+      const getsingleProfileData = await dispatch(getProfileAction(id));
+      console.log("Get Single Profile Data : ", getsingleProfileData);
+      setLoadingDel(false)
+      setModalShow(false)
+      console.log("Desc Deleted Successfully");
     } else {
       console.log("Failed to Delete Desc");
     }
@@ -257,7 +261,7 @@ const UserProfile = () => {
     <div >   {/*  main container */}
       <ProfilePic />
       <div className='container'>
-      <ToastContainer />
+        <ToastContainer />
         <div className='row pt-2  '>
           <div className={PrCss.contactFollow}>
 
@@ -356,16 +360,10 @@ const UserProfile = () => {
               </div>
             </>)
           }
-            <UserExperience />
-            <UserEducation /> 
-          <div className={` ${PrCss.addSections}`}>
-            <div className="card w-100">
-              <div className="card-body text-center">
-                <i className='fa-solid fa-plus'></i>
-                <p className='card-text'>Add your skills </p>
-              </div>
-            </div>
-          </div>
+          <UserExperience />
+          <UserEducation />
+          <KeySkills />
+          <UserCertifications />           
           <div className={` ${PrCss.addSections}`}>
             <div className="card w-100">
               <div className="card-body text-center">

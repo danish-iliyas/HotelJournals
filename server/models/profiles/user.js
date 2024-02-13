@@ -28,7 +28,12 @@ const UserProfileSchema = new Schema({
     userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
 });
 
+const SkillsSchema = new Schema({
+    skills: {type:[String],required:true},
+    userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
+});
 
+export const Skills = mongoose.model('Skills',SkillsSchema);
 export const UserEducation = mongoose.model('UserEducation',UserEducationSchema);
 export const Experience = mongoose.model('Experience',ExperienceSchema);
 export default mongoose.model('UserProfile',UserProfileSchema)
