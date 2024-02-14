@@ -28,6 +28,9 @@ import getskillsReducer from "./profile/userSkills/getskills";
 import setUserSkillsReducer from "./profile/userSkills/setskills";
 import UpdateSkillsReducer from "./profile/userSkills/updateskills";
 
+import getCertificatesReducer from "./certificatesReducer/getCertificatesReducer";
+import setCertificatesReducer from "./certificatesReducer/setCertificatesReducer";
+import updateCertificateReducer from "./certificatesReducer/updateCertificateReducer";
 
 export default combineReducers({
     authReducer,
@@ -58,4 +61,7 @@ export default combineReducers({
     getskillsReducer,
     setUserSkillsReducer,
     UpdateSkillsReducer,
+    getCertificatesReducer,
+    setCertificatesReducer,
+    updateCertificateReducer
 })

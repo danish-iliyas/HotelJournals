@@ -125,3 +125,16 @@ export const updateUserSkills = (id,updatedData) => API.patch(`/user/profile/edi
 
 // Deleting User Skills
 export const deleteUserSkills = (id) => API.delete(`/user/profile/deleteSkills/${id}`)
+
+// ----------------------------------------- For User Profile (Certificates) ------------------------------
+// Setting User Certificates
+export const setUserCertification = (CertificatesData) => API.post('user/profile/setCertification',CertificatesData)
+
+// Getting User Certificates
+export const getUserCertification = (id) => API.get(`/user/profile/getCertification/${id}`)
+
+// Updating User Certificates
+export const updateUserCertification = (id,updatedData) => API.patch(`/user/profile/editCertification/${id}`,updatedData)
+
+// Deleting User Certificates
+export const deleteCertification = (id) => API.delete(`/user/profile/deleteCertification/${id}`)

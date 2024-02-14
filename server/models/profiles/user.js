@@ -22,6 +22,17 @@ const ExperienceSchema = new Schema({
     userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
 });
 
+const CertificationSchema = new Schema({
+    certificate_name: {type:String,required:true},
+    issued_by: {type:String,required:true},
+    issue_month: {type:String,required:true},
+    issue_year: {type:String,required:true},
+    expiration_month: {type:String,required:false},
+    expiration_year: {type:String,required:false},
+    credential_id: {type:String,required:false},
+    credential_url: {type:String,required:false},
+    userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
+});
 
 const UserProfileSchema = new Schema({
     introduction : {type:String,required:false},
@@ -33,6 +44,7 @@ const SkillsSchema = new Schema({
     userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
 });
 
+export const Certificates = mongoose.model('Certificates',CertificationSchema);
 export const Skills = mongoose.model('Skills',SkillsSchema);
 export const UserEducation = mongoose.model('UserEducation',UserEducationSchema);
 export const Experience = mongoose.model('Experience',ExperienceSchema);

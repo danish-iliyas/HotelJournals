@@ -3,7 +3,7 @@ import { DeleteProfile, EditProfile, getUserProfile  , setUserProfile} from '../
 import { DeleteExperience, EditExperience, getUserExperience, setUserExperience } from '../controllers/userProfile/experienceController.js';
 import { DeleteEducation, UpdateEducation, getUserEducation, setUserEducation } from '../controllers/userProfile/educationControler.js';
 import { DeleteSkills, EditSkills, getUserSkills, setUserSkills } from '../controllers/userProfile/skillsController.js';
-
+import { DeleteUserCertification, EditUserCertification, getUserCertification, setUserCertification } from '../controllers/userProfile/certificatesController.js';
 
 const router = express.Router();
 
@@ -30,6 +30,13 @@ router.post('/setSkills',setUserSkills)
 router.get('/getSkills/:id',getUserSkills)
 router.delete('/deleteSkills/:id',DeleteSkills)
 router.patch('/editSkills/:id',EditSkills)
+
+
+// Certification Section routes
+router.post('/setCertification',setUserCertification)
+router.get('/getCertification/:id',getUserCertification)
+router.delete('/deleteCertification/:id',DeleteUserCertification)
+router.patch('/editCertification/:id',EditUserCertification)
 
 
 export default router;

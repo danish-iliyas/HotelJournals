@@ -21,6 +21,7 @@ import UserExperience from './UserExperience';
 import UserEducation from './UserEducation';
 import KeySkills from './KeySkills';
 import UserCertifications from './UserCertifications';
+import UserLanguages from './UserLanguages';
 
 
 
@@ -363,7 +364,8 @@ const UserProfile = () => {
           <UserExperience />
           <UserEducation />
           <KeySkills />
-          <UserCertifications />           
+          <UserCertifications /> 
+          <UserLanguages />          
           <div className={` ${PrCss.addSections}`}>
             <div className="card w-100">
               <div className="card-body text-center">
