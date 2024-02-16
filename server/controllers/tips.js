@@ -45,7 +45,7 @@ export const SingleTipData = async (req, res) => {
 export const DeleteTip = async (req, res) => {
     const { id: _id } = req.params;  // Renaming id to _id
         if (!mongoose.Types.ObjectId.isValid(_id)) {
-            return res.status(500).send('No post with that id');
+            return res.status(400).json({success:false, message: 'Not a valid Id'});
         }
     try {
         await Tips.findByIdAndDelete(_id);

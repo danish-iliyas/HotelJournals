@@ -28,9 +28,20 @@ import getskillsReducer from "./profile/userSkills/getskills";
 import setUserSkillsReducer from "./profile/userSkills/setskills";
 import UpdateSkillsReducer from "./profile/userSkills/updateskills";
 
-import getCertificatesReducer from "./certificatesReducer/getCertificatesReducer";
-import setCertificatesReducer from "./certificatesReducer/setCertificatesReducer";
-import updateCertificateReducer from "./certificatesReducer/updateCertificateReducer";
+import getCertificatesReducer from "./profile/certificatesReducer/getCertificatesReducer";
+import setCertificatesReducer from "./profile/certificatesReducer/setCertificatesReducer";
+import updateCertificateReducer from "./profile/certificatesReducer/updateCertificateReducer";
+
+import getLanguageReducer from "./profile/languageReducer/getLang";
+import setLanguageReducer from "./profile/languageReducer/setLang";
+import updateLanguageReducer from "./profile/languageReducer/updateLang";
+
+import updateAddInfoReducer from "./profile/additionalInfoReducer/updateAddInfo";
+import setAdditionalInfoReducer from "./profile/additionalInfoReducer/setAddInfo";
+import getAddInfoReducer from "./profile/additionalInfoReducer/getAddInfo";
+
+import CVsettergetterReducer from "./profile/CVReducer/CVSetterGetterReducer";
+import UpdateCVReducer from "./profile/CVReducer/updateCVReducer";
 
 export default combineReducers({
     authReducer,
@@ -63,5 +74,13 @@ export default combineReducers({
     UpdateSkillsReducer,
     getCertificatesReducer,
     setCertificatesReducer,
-    updateCertificateReducer
+    updateCertificateReducer,
+    getLanguageReducer,
+    setLanguageReducer,
+    updateLanguageReducer,
+    updateAddInfoReducer,
+    setAdditionalInfoReducer,
+    getAddInfoReducer,
+    CVsettergetterReducer,
+    UpdateCVReducer,
 })

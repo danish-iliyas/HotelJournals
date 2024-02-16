@@ -315,7 +315,7 @@ function MyVerticallyCenteredModalEditCertification(props) {
             credential_url: credential_url,
         }
 
-        const response = await dispatch(updateCertificateAction(editId,certificateData))
+        const response = await dispatch(updateCertificateAction(editId, certificateData))
         if (response.success) {
             const respo2 = await dispatch(getCertificatesAction(id))
             if (respo2) {
@@ -527,7 +527,7 @@ const UserCertifications = () => {
         dispatch(getCertificatesAction(id))
     }, [])
 
-    const allcertificates = useSelector((state) => state?.getCertificatesReducer);
+    const allcertificates = useSelector((state) => state.getCertificatesReducer);
     const allcertificatesData = allcertificates?.data?.result;
     console.log(allcertificatesData);
 
@@ -536,7 +536,7 @@ const UserCertifications = () => {
     return (
         <div>
             <ToastContainer />
-            {!allcertificatesData ?
+            {(allcertificatesData?.length === 0 || allcertificatesData === undefined) ?
                 <>
                     <div className={` ${PrCss.addSections}`} onClick={() => setModalShow(true)} style={{ cursor: 'pointer' }}>
                         <div className="card w-100">
@@ -554,11 +554,11 @@ const UserCertifications = () => {
                             <CiSquarePlus size={'35'} />
                         </div>
                     </div>
-                    {allcertificatesData.map((certificate) => {
+                    {allcertificatesData?.map((certificate) => {
                         return (
                             <div class="card" style={{ width: '50vw' }}>
                                 <div className="card-body">
-                                    <div className="card-header mt-1">
+                                    <div className="card-header mt-1" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         {certificate.certificate_name}
                                         <div style={{ cursor: 'pointer' }}
                                             onClick={() => {

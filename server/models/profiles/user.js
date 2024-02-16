@@ -44,6 +44,27 @@ const SkillsSchema = new Schema({
     userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
 });
 
+const LanguageSchema = new Schema({
+    language: {type:String,required:true},
+    proficiency: {type:String,required:true},
+    userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
+})
+
+const AdditionalInfoSchema = new Schema({
+    title : {type:String,required:true},
+    description : {type:String,required:false},
+    userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
+})
+
+const CVSchema = new Schema({
+    cv_db: {type:String,required:true},
+    userId: {type:mongoose.Schema.Types.ObjectId,ref:'User',required:true},
+})
+
+
+export const CV = mongoose.model('CV',CVSchema);
+export const AdditionalInfo = mongoose.model('AdditionalInfo',AdditionalInfoSchema);
+export const Language = mongoose.model('Language',LanguageSchema);
 export const Certificates = mongoose.model('Certificates',CertificationSchema);
 export const Skills = mongoose.model('Skills',SkillsSchema);
 export const UserEducation = mongoose.model('UserEducation',UserEducationSchema);

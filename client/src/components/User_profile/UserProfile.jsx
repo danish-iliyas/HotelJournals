@@ -22,6 +22,8 @@ import UserEducation from './UserEducation';
 import KeySkills from './KeySkills';
 import UserCertifications from './UserCertifications';
 import UserLanguages from './UserLanguages';
+import AdditionalUserInfo from './AdditionalUserInfo';
+import UploadUserCV from './UploadUserCV';
 
 
 
@@ -366,6 +368,8 @@ const UserProfile = () => {
           <KeySkills />
           <UserCertifications /> 
           <UserLanguages />          
+          <AdditionalUserInfo />
+          <UploadUserCV /> 
           <div className={` ${PrCss.addSections}`}>
             <div className="card w-100">
               <div className="card-body text-center">

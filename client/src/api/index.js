@@ -138,3 +138,33 @@ export const updateUserCertification = (id,updatedData) => API.patch(`/user/prof
 
 // Deleting User Certificates
 export const deleteCertification = (id) => API.delete(`/user/profile/deleteCertification/${id}`)
+
+// ----------------------------------------- For User Profile (Languages) ------------------------------
+// Setting User Languages
+export const setUserLanguage = (LanguageData) => API.post('/user/profile/setLanguage',LanguageData)
+// Getting User Language
+export const getUserLanguage = (id) => API.get(`/user/profile/getLanguage/${id}`)
+// Updating User Language
+export const updateUserLanguage = (id,updatedData) => API.patch(`/user/profile/editLanguage/${id}`,updatedData)
+// Deleting User Language
+export const deleteUserLanguage = (id) => API.delete(`/user/profile/deleteLanguage/${id}`)
+
+// ----------------------------------------- For User Profile (Additional Information) ------------------------------
+// Setting additional Info
+export const setAdditionalInfo = (additionalData) => API.post('/user/profile/setAddInfo',additionalData)
+// Getting additional Info
+export const getAdditionalInfo = (id) => API.get(`/user/profile/getAddInfo/${id}`)
+// Updating additional Info
+export const updatedAdditionalInfo= (id,updatedData) => API.patch(`/user/profile/editAddInfo/${id}`,updatedData)
+// Deleting additional Info
+export const deleteAdditionalInfo = (id) => API.delete(`user/profile/deleteAdditionalInfo/${id}`)
+
+// ----------------------------------------- For User Profile (CV) ------------------------------
+// Setting User CV
+export const setUserCv = (id,cvData) => API.post(`/user/profile/uploadCV/${id}`,cvData)
+// Getting User CV
+export const getUserCv = (id) => API.get(`/user/profile/getCV/${id}`)
+// Updating User CV
+export const updateUserCv = (id,cvData) => API.patch(`/user/profile/updateCV/${id}`,cvData)
+// Deleting User CV
+export const deleteUserCV = (id) => API.delete(`/user/profile/deleteCV/${id}`)
