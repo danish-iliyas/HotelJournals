@@ -44,3 +44,56 @@
     transform: rotate(360deg);
   }
 } */
+.resume{
+  padding-left: 20px;
+  padding-right: 20px;
+  /* background-color: red; */
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.rheading{
+height: 40vh;
+width: 100%;
+display: flex;
+flex-direction: column;
+/* background-color: aqua; */
+justify-content: space-around;
+}
+.up_date{
+  /* background-color: blue; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.rbutton{
+  background: yellow;
+     width: 80px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+
+}
+.rbutton button{
+  background-color: brown;
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+}
+
+
+
+.inputfield{
+  /* background-color: green; */
+  height: 40vh;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px dotted rgb(71, 64, 64);
+}

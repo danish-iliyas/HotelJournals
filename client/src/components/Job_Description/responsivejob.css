@@ -1,0 +1,55 @@
+@media screen and (max-width: 640px){
+   
+    .jobcontainer{
+        /* background-color: yellow; */
+        flex-direction: column;
+        padding: 10px;
+    }
+    .left-container{
+        /* background-color: green; */
+        width: 100%;
+        height: auto;
+    }
+    .right-container{
+        width: 100%;
+        padding: 5px;
+    }
+    .rightcompanydescripton>a{
+        font-size: 10px;
+      }
+    .detailbutton{
+        flex-direction: column;
+        gap: 5px;
+        width: 40%;
+    }
+    .recommendedjobsdetail{
+        height: 40%;
+    }
+    .recommendedjobs{
+        height: auto;
+    }
+    
+}
+
+
+@media  (min-width: 640px) and (max-width: 850px){
+    .jobcontainer{
+        /* background-color: palegoldenrod; */
+        padding: 10px;
+    }    
+    .right-container{
+        padding: 5px;
+    }
+    .recommendedjobs{
+        height: auto;
+    }
+    .detailbutton{
+        flex-direction: column;
+        gap: 5px;
+        width: 40%;
+    }
+    .servicesection{
+        height: 300px;
+    }
+
+}

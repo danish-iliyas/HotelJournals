@@ -24,7 +24,10 @@ import JobsDashboard from './components/Jobs/JobsDashboard';
 import CreateJobs from './components/admin/AdminJobs/CreateJobs';
 import HotelLandingpage from './components/Hotel Journals Landing page/HotelLandingpage';
 import Animatedpage from './components/Animated-page/Animatedpage';
-import Job_search from './components/Job_search/Job_search';
+import Job_search from './components/Job_search/Job_search'
+import Resume from './components/Resume/Resume';
+import JobDescription from './components/Job_Description/JobDescription';
+
 
 
 
@@ -69,11 +72,15 @@ const AllRoutes = () => {
 
             <Route path='/test/:id' element={<SingleTip /> } > </Route>
 
-            {/* landig page  */}
+            {/* landig page danish  */}
             <Route path='/HotelLandingpage' element={<HotelLandingpage /> } > </Route>
             <Route path='/Animatedpage' element={<Animatedpage /> } > </Route>
             <Route path='/jobsearch' element={<Job_search/> } > </Route>
+            <Route path='/Resume' element={<Resume/> } > </Route>
+            <Route path='/JobDescription' element={<JobDescription/> } > </Route>
+
         </Routes>
+
     )
 }
 
