@@ -1,5 +1,16 @@
 import * as api from '../../api/index.js'
 
+export const ApplyJobAction = (jobApplicants) => async(dispatch) => {
+    try{
+        const {data} = await api.ApplyJob(jobApplicants);
+        dispatch({type:'APPLY_JOB',data});
+        return { success: true, message: "Applied for Job Successfully"};
+    }catch(err){
+        console.log("Error from ApplyJob Action: ", err.message, err.stack);
+        return { success: false, message:err.response.data.message };
+    }
+}
+
 export const CreateJob = (jobData) => async (dispatch) => {
     try {
         const { data } = await api.PostNewJob(jobData);

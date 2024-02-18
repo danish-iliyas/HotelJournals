@@ -2,6 +2,7 @@ import express from 'express';
 
 import {
     DeleteJob,
+    applyJob,
     editJob,
     getAllJobs,
     getSingleJob,
@@ -10,6 +11,8 @@ import {
 
 const router = express.Router();
 
+// Apply for a job
+router.patch('/applyjob', applyJob)
 // Add a new Job
 router.post('/createjob', postJobs)
 // get all Jobs

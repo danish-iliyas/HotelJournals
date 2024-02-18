@@ -19,6 +19,7 @@ const jobsSchema  = new Schema({
     jobDescription : {type:String,required:true},
     isExternal : {type:Boolean,required:true},
     jobLink : {type:String,required:false},
+    applicants : {type:[{type:Schema.Types.ObjectId,ref:'User'}],required:false},
     created_by : {type:Schema.Types.ObjectId,ref:'User',required:true},
     created_at : {type:Date,default:Date.now},
 })

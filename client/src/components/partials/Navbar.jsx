@@ -125,7 +125,7 @@ const Navbar = () => {
 
                         <li className="nav-item active">
                             <div className='nav-link' >
-                                <NavLink to='/jobs/post' className={NavCSS.header_nav_links} >
+                                <NavLink to='/jobs/dashboard' className={NavCSS.header_nav_links} >
                                   Recruiter
                                 </NavLink>
                             </div>

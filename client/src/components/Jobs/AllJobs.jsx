@@ -16,23 +16,26 @@ import { HiDotsVertical } from "react-icons/hi";
 
 
 // Modules 
-import { DeleteJobAction, GetJobs } from '../../../redux/actions/jobsAdmin.js';
-import { DeleteACourseAction } from '../../../redux/actions/courseAdmin.js';
+// import { DeleteJobAction, GetJobs } from '../../../redux/actions/jobsAdmin.js';
+import { GetJobs } from '../../redux/actions/jobsAdmin.js';
+// import { DeleteACourseAction } from '../../../redux/actions/courseAdmin.js';
 
-const RecruiterDashboard = () => {
+const AllJobs = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showDropDown, setShowDropDown] = useState(false);
+    const [jobId, setJobId] = useState('');
 
-    const AllJobs = useSelector((state) => state.AllJobsReducer)
-    console.log(AllJobs);
+    const AllJobsData = useSelector((state) => state.AllJobsReducer)
+    console.log(AllJobsData);
 
-    const localStorageData = JSON.parse(localStorage.getItem('Profile'));
-    const local_user_id = localStorageData?.result?._id;
-    console.log(`LocalUSERID :  ${local_user_id}`);
+    // const localStorageData = JSON.parse(localStorage.getItem('Profile'));
+    // const local_user_id = localStorageData?.result?._id;
+    // console.log(`LocalUSERID :  ${local_user_id}`);
 
-    const MyJobs = AllJobs?.result?.filter((jobs) => jobs.created_by === local_user_id);
+    // const MyJobs = AllJobsData?.result?.filter((jobs) => jobs.created_by === local_user_id);
+    const MyJobs = AllJobsData?.result;
     console.log(MyJobs);
 
 
@@ -42,23 +45,34 @@ const RecruiterDashboard = () => {
     }, [dispatch]);
 
     const handleConfirmedDelete = (id) => {
-        dispatch(DeleteJobAction(id));
-        navigate('/job/dashboard');
-        console.log('Job Deleted successfully')
-        toast.success('Job Deleted Successfully')
+        // dispatch(DeleteJobAction(id));
+        // navigate('/job/dashboard');
+        // console.log('Job Deleted successfully')
+        // toast.success('Job Deleted Successfully')
     }
 
 
     const handleDelete = (id) => {
-        const result = window.confirm('Are you sure you want to delete this Job ?');
-        if (result) {
-            console.log('Delete the course')
-            handleConfirmedDelete(id);
-        } else {
-            console.log('Cancelled')
-        }
+        // const result = window.confirm('Are you sure you want to delete this Job ?');
+        // if (result) {
+        //     console.log('Delete the course')
+        //     handleConfirmedDelete(id);
+        // } else {
+        //     console.log('Cancelled')
+        // }
     }
 
+    const handleApply = (jobId) => {
+        // e.preventDefault();
+        const jobid = jobId;
+        const userApplied = JSON.parse(localStorage.getItem('Profile'));
+        console.log('this is the user applied : ')
+        console.log(userApplied?.result?._id);
+        console.log('this is the job id : ')
+        console.log(jobid);
+
+        // console.log(userApplied?._id);
+    }
 
 
 
@@ -70,18 +84,21 @@ const RecruiterDashboard = () => {
 
                 <ToastContainer />
                 <div className='container d-flex mt-2 '>
-                    <h2 className='pt-4 mb-4'> Recruiter Dashboard  </h2>
+                    <h2 className='pt-4 mb-4'> Welcome to jobs page </h2>
                     <div className='ml-4 mt-4'>
-                        <button className='btn btn-warning text-white'>
+                        {/* <button className='btn btn-warning text-white'>
                             <NavLink to='/jobs/post' target='_blank' style={{ textDecoration: 'none', color: 'white' }} >
                                 Add a new Job
                             </NavLink>
-                        </button>
+                        </button> */}
                     </div>
 
                 </div>
                 {MyJobs?.map((job, index) => (
-                    <div className="col-md-6 col-lg-6 " style={{ marginLeft: '22vw', marginTop: '1vw' }}>
+                    <div className="col-md-6 col-lg-6 " 
+                    style={{ marginLeft: '22vw', marginTop: '1vw' , cursor: 'pointer'}} 
+                    onClick={() => navigate(`/AllJobs/${job._id}`)}
+                    > 
                         <div className="card h-100 border shadow">
 
                             <div className="card-body ">
@@ -90,24 +107,22 @@ const RecruiterDashboard = () => {
                                 <div className="d-flex justify-content-between align-items-center">
                                     <span className="badge badge-success">Active</span>
                                     {/* <span className="badge badge-success">Active</span> */}
-                                    <div>
+                                    {/* <div>
                                         <button className="btn btn-sm btn-light mr-2" >
                                             <IoShareSocial />
                                         </button>
                                         <button className='btn btn-sm btn-light mr-2'>
                                             <HiDotsVertical />
                                         </button>
-                                        {/* <button className='btn btn-sm btn-light mr-2'>
-                                        <FaPencil />
-                                    </button> */}
-
                                         <NavLink style={{ textDecoration: 'none' }} to={`/jobs/dashboard/update/${job._id}`} >
                                             <button className='btn btn-sm btn-light mr-2' > <FaPencil /> </button>
                                         </NavLink>
                                         <NavLink style={{ textDecoration: 'none' }} to={`/jobs/dashboard/`}>
-                                            <button className='btn btn-sm btn-light mr-2' onClick={() => { handleDelete(job._id) }} ><IoTrashBin /></button>
+                                            <button className='btn btn-sm btn-light mr-2' onClick={() => { handleDelete(job._id)}} ><IoTrashBin /></button>
                                         </NavLink>
-                                    </div>
+                                    </div> */}
+
+
                                 </div>
                                 <div className="mb-2">
                                     {/* <p className="mb-1"><strong>Skills:</strong></p> */}
@@ -143,15 +158,20 @@ const RecruiterDashboard = () => {
                                 </div>
 
                             </div>
-                            <div className="card-footer bg-transparent border-top-0 p-0">
+                            {/* <div className="card-footer bg-transparent border-top-0 p-0">
                                 <button
                                     className="btn btn-sm btn-block"
-                                    onClick={() => navigate(`/jobs/dashboard/${job._id}/job/manage/`)}
                                     style={{ backgroundColor: '#E4B49D' }}
+                                    onClick={
+                                        () => {
+                                            handleApply(job._id);
+                                        }
+                                    }
                                 >
-                                    View Applicants
+                                    Apply Here
                                 </button>
-                            </div>
+                            </div> */}
+                            
                         </div>
                     </div>
                 ))}
@@ -160,4 +180,4 @@ const RecruiterDashboard = () => {
     )
 }
 
-export default RecruiterDashboard
+export default AllJobs

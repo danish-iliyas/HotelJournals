@@ -55,6 +55,8 @@ export const DeleteCourse = (id) => API.delete(`/courses/singleCourse/${id}`)
 
 
 //  ----------------------------  For Creating a Job---------------
+// Job Apply (Applicants)
+export const ApplyJob = (jobApplicants) => API.patch('/jobs/applyjob',jobApplicants)
 // Job Admin (Job creation)
 export const PostNewJob = (JobData) => API.post('/jobs/createjob',JobData)
 

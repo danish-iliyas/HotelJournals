@@ -22,6 +22,9 @@ import JobsDashboard from './components/Jobs/JobsDashboard';
 import CreateJobs from './components/admin/AdminJobs/CreateJobs';
 import RecruiterDashboard from './components/admin/AdminJobs/RecruiterDashboard';
 import UpdateJobs from './components/admin/AdminJobs/UpdateJobs';
+import AllJobs from './components/Jobs/AllJobs';
+import ParticularJob from './components/Jobs/ParticularJob';
+import ManageParticularJob from './components/Jobs/ManageParticularJob';
 
 
 const AllRoutes = () => {
@@ -39,7 +42,8 @@ const AllRoutes = () => {
 
             {/* Jobs Routes */}
             <Route path='/jobs' element={<JobsLanding />} > </Route>
-            <Route path='/jobs/dashboard' element={<RecruiterDashboard />} > </Route>
+            <Route path='/AllJobs' element={<AllJobs />} > </Route>
+            <Route path='/AllJobs/:id' element={<ParticularJob />} > </Route>
 
             {/* Admin Routes  */}
                     {/*  For Tips */}
@@ -57,6 +61,8 @@ const AllRoutes = () => {
             <Route path='/educator/dashboard/update/:id' element={<UpdateCourse />}>  </Route>
                 {/* For Jobs */}
             <Route path='/jobs/post' element={<CreateJobs />} ></Route>
+            <Route path='/jobs/dashboard' element={<RecruiterDashboard />} > </Route>
+            <Route path='/jobs/dashboard/:id/job/manage/' element={<ManageParticularJob />} > </Route> 
             <Route path='/jobs/dashboard/update/:id' element={<UpdateJobs />}></Route>
 
 

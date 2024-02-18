@@ -199,10 +199,10 @@ const CreateJobs = () => {
             <label htmlFor="company_name"> Job Category <small className='text-danger'> * </small> </label>
             <select className='form-control' onChange={(e) => setJobCategory(e.target.value)}>
               <option value="">Select</option>
-              <option value="intern">Intern</option>
-              <option value="full-time">Full Time</option>
-              <option value="part-time">Part Time</option>
-              <option value="contract">Contract</option>
+              <option value="Intern">Intern</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Contract">Contract</option>
             </select>
           </div>
 
@@ -210,9 +210,9 @@ const CreateJobs = () => {
             <label htmlFor="jobType"> Job Type  <small className='text-danger'> * </small> </label>
             <select className='form-control' onChange={(e) => setJobType(e.target.value)}>
               <option value="">Select</option>
-              <option value="remote"> Remote </option>
-              <option value="in-office"> InOffice </option>
-              <option value="hybrid"> Hybrid </option>
+              <option value="Remote"> Remote </option>
+              <option value="InOffice"> InOffice </option>
+              <option value="Hybrid"> Hybrid </option>
             </select>
           </div>
         </div>

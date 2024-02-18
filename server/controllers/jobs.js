@@ -2,6 +2,33 @@
 import mongoose from "mongoose";
 import Jobs from '../models/jobs.js'
 
+export const applyJob = async (req, res) => {
+    const { jobId, userId } = req.body;
+    
+    if(!mongoose.Types.ObjectId.isValid(jobId) || !mongoose.Types.ObjectId.isValid(userId)){
+        return res.status(400).json({ success: false, message: ' Invalid ID"s ' })
+    }
+    try {
+        const jobApplicants = await Jobs.findOneAndUpdate(
+            { _id: jobId },
+            {
+                $addToSet:
+                    { applicants: userId }
+            },
+            { new: true }
+        )
+
+        if(jobApplicants){
+            res.status(200).json({ success: true, message: 'Applied for Job Successfully', result: jobApplicants })
+        }else{
+            res.status(400).json({ success: false, message: 'Failed to apply for job' })
+        }
+    } catch (error) {
+        console.log("Error from applyJob Controller ", error.message)
+        res.status(500).json({ success: false, message: error.message })
+    }
+}
+
 export const postJobs = async (req, res) => {
     try {
         const {
@@ -24,12 +51,12 @@ export const postJobs = async (req, res) => {
             !work_experience_max ||
             !salary_start ||
             !salary_end ||
-            !salary_specification||
+            !salary_specification ||
             !no_of_openings ||
             !job_description
-          ) {
-            return res.status(400).json({ success:false,message: "Please Fill all the fieldsssss" });
-          }        
+        ) {
+            return res.status(400).json({ success: false, message: "Please Fill all the fieldsssss" });
+        }
         else {
             const newJob = await Jobs.create({
                 jobTitle: job_title,
@@ -64,7 +91,6 @@ export const postJobs = async (req, res) => {
     }
 }
 
-
 export const getAllJobs = async (req, res) => {
     try {
         const AllJobs = await Jobs.find();
@@ -75,6 +101,7 @@ export const getAllJobs = async (req, res) => {
                 jobTitle: singleJob.jobTitle,
                 jobCategory: singleJob.jobCategory,
                 jobType: singleJob.jobType,
+                jobApplicants: singleJob.applicants,
                 jobLocation: singleJob.jobLocation,
                 mandatorySkills: singleJob.mandatorySkills,
                 optionalSkills: singleJob.optionalSkills,
@@ -93,9 +120,9 @@ export const getAllJobs = async (req, res) => {
                 created_by: singleJob.created_by
             })
         });
-        res.status(200).json({ success:true,message: 'All jobs Data Fetched Successfully', result: AllJobsArray })
+        res.status(200).json({ success: true, message: 'All jobs Data Fetched Successfully', result: AllJobsArray })
     } catch (error) {
-        res.status(500).json({ success:false,message: error.message });
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
@@ -103,29 +130,29 @@ export const getSingleJob = async (req, res) => {
     try {
         const { id } = req.params;
         const singleJob = await Jobs.findById(id);
-        res.status(200).json({ success:true,message: 'Single Job Data', result: singleJob })
+        res.status(200).json({ success: true, message: 'Single Job Data', result: singleJob })
     } catch (err) {
-        res.status(500).json({ success:false,message: err.message })
+        res.status(500).json({ success: false, message: err.message })
     }
 }
 
-export const DeleteJob = async (req, res) => {  
+export const DeleteJob = async (req, res) => {
     const { id: _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id)) {
-        return res.status(400).json({ success:false,message: 'no job exists' })
+        return res.status(400).json({ success: false, message: 'no job exists' })
     }
     try {
         await Jobs.findByIdAndDelete(_id);
-        res.status(200).json({success:true , message:'job deleted successfully'})
+        res.status(200).json({ success: true, message: 'job deleted successfully' })
     } catch (err) {
-        res.status(500).json({ success:false , message: err.message })
+        res.status(500).json({ success: false, message: err.message })
     }
 }
 
 export const editJob = async (req, res) => {
-    const {id:_id} = req.params;
-    if(!mongoose.Types.ObjectId.isValid(_id)){
-        return res.status(400).send({success:false,message:'Invalid job ID'});
+    const { id: _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(400).send({ success: false, message: 'Invalid job ID' });
     }
     const {
         job_title, job_category, job_type,
@@ -138,38 +165,38 @@ export const editJob = async (req, res) => {
 
     console.log('after console log of req.body in editJob Controller');
     try {
-        const updatedJob = await Jobs.findByIdAndUpdate(_id,{
-            $set:{
-                'jobTitle':job_title,
-                'jobCategory':job_category,
-                'jobType':job_type,
-                'jobLocation':job_location,
-                'mandatorySkills':mandatory_skills,
-                'optionalSkills':optional_skills,
-                'joiningDate':joining_date,
-                'isImmediate':is_immediate,
-                'workExperienceMin':work_experience_min,
-                'workExperienceMax':work_experience_max,
-                'salarySpecification':salary_specification,
-                'salaryStart' : salary_start,
-                'salaryEnd' : salary_end,
-                'no_of_openings' : no_of_openings,
-                'extraBenifits' : extra_benifits,
-                'jobDescription' : job_description,
-                'isExternal' : isExternal,
-                'jobLink' : job_link
+        const updatedJob = await Jobs.findByIdAndUpdate(_id, {
+            $set: {
+                'jobTitle': job_title,
+                'jobCategory': job_category,
+                'jobType': job_type,
+                'jobLocation': job_location,
+                'mandatorySkills': mandatory_skills,
+                'optionalSkills': optional_skills,
+                'joiningDate': joining_date,
+                'isImmediate': is_immediate,
+                'workExperienceMin': work_experience_min,
+                'workExperienceMax': work_experience_max,
+                'salarySpecification': salary_specification,
+                'salaryStart': salary_start,
+                'salaryEnd': salary_end,
+                'no_of_openings': no_of_openings,
+                'extraBenifits': extra_benifits,
+                'jobDescription': job_description,
+                'isExternal': isExternal,
+                'jobLink': job_link
             },
-        },{new:true}) 
-        
+        }, { new: true })
+
         console.log(updatedJob);
-        
-        if(!updatedJob){
-            return res.status(400).json({success:false,message:'Failed to update job'})
-        }else{
-            res.status(200).json({success:true,message:'Job Updated Successfulllllllly',result:updatedJob})
+
+        if (!updatedJob) {
+            return res.status(400).json({ success: false, message: 'Failed to update job' })
+        } else {
+            res.status(200).json({ success: true, message: 'Job Updated Successfulllllllly', result: updatedJob })
         }
     } catch (error) {
-        console.log("Error from editJob Controller ",error.message)
-        res.status(500).json({success:false,message:error.message})
+        console.log("Error from editJob Controller ", error.message)
+        res.status(500).json({ success: false, message: error.message })
     }
 }
