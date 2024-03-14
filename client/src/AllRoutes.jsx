@@ -25,7 +25,12 @@ import UpdateJobs from './components/admin/AdminJobs/UpdateJobs';
 import AllJobs from './components/Jobs/AllJobs';
 import ParticularJob from './components/Jobs/ParticularJob';
 import ManageParticularJob from './components/Jobs/ManageParticularJob';
-
+import Jobdescription from './components/Job_Description/JobDescription';
+import Job_search from './components/Job_search/Job_search';
+import Resume from './components/Resume/Resume';
+import Dashboardd from './components/Dashboard/Dashboardd'
+import ManageCandidate from './components/ManageCandidate/ManageCandidate';
+import HotelLandingpage from './components/HotelLandingPage/HotelLandingPage';
 
 const AllRoutes = () => {
   return (
@@ -65,10 +70,17 @@ const AllRoutes = () => {
             <Route path='/jobs/dashboard/:id/job/manage/' element={<ManageParticularJob />} > </Route> 
             <Route path='/jobs/dashboard/update/:id' element={<UpdateJobs />}></Route>
 
-
+{/* job descripton  */}
+<Route path='/HotelLandingpage' element={<HotelLandingpage /> } > </Route>
+<Route path='/Resume' element={<Resume/> } > </Route>
+            <Route path='/Jobdescription' element={<Jobdescription />}></Route>
+            <Route path='/JobSearch' element={<Job_search/>}></Route>
+            <Route path='/Dashboardd' element={<Dashboardd/> } > </Route>
+            <Route path='/ManageCandidate' element={<ManageCandidate/> } > </Route>
             {/* // Temporary Route for testing */}
 
             <Route path='/test/:id' element={<SingleTip /> } > </Route>
+             <Route path='/test/:id' element={<SingleTip /> } > </Route>
         </Routes>
     )
 }
